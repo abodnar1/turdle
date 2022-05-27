@@ -4,6 +4,7 @@ var currentRow = 1;
 var guess = '';
 var gamesPlayed = [];
 var words;
+// I added a global variable to store the words api data in
 
 // Query Selectors
 var inputs = document.querySelectorAll('input');
@@ -22,6 +23,7 @@ var gameOverGuessCount = document.querySelector('#game-over-guesses-count');
 var gameOverGuessGrammar = document.querySelector('#game-over-guesses-plural');
 
 // API apiCalls
+// I added the apicalls to this instead of importing/exporting
 const fetchWordData = () => {
   return fetch("http://localhost:3001/api/v1/words")
       .then(response => response.json())
@@ -39,6 +41,7 @@ const fetchData = () => {
 
 // Event Listeners
 window.addEventListener('load', fetchData);
+// I changed the function to run on load to be fetchData instead setGame
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', function() { moveToNextInput(event) });
@@ -179,6 +182,7 @@ function checkForWin() {
 
 function changeRow() {
   currentRow++;
+  console.log(currentRow)
   updateInputPermissions();
 }
 
@@ -196,6 +200,7 @@ function recordGameStats() {
 function changeGameOverText() {
   gameOverGuessCount.innerText = currentRow;
   if (currentRow < 2) {
+    console.log(gameOverGuessCount)
     gameOverGuessGrammar.classList.add('collapsed');
   } else {
     gameOverGuessGrammar.classList.remove('collapsed');
